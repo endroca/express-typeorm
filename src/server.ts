@@ -1,6 +1,7 @@
+import { config } from 'dotenv';
+import { resolve } from 'path';
 import 'reflect-metadata';
 import { createConnection } from 'typeorm';
-
 /**
  * MiddleWare
  */
@@ -12,13 +13,18 @@ import * as cors from 'cors';
  */
 import UserController from './controllers/user';
 
+/**
+ * Import APP
+ */
 import App from './app';
+
+config({ path: resolve(__dirname, '../.env') });
 
 (async () => {
   await createConnection();
 
   const app = new App({
-    port: 3333,
+    port: Number(process.env.PORT) || 3333,
     controllers: [
       {
         path: '/users',
