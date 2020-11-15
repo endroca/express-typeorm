@@ -1,4 +1,4 @@
-import * as express from 'express';
+import express from 'express';
 import routes from './routes';
 
 interface Controllers {
@@ -13,14 +13,20 @@ export default class App {
 
   public constructor(settings: {
     port: number;
-    controllers: Controllers[];
-    middlewares: any[];
+    controllers?: Controllers[];
+    middlewares?: any[];
   }) {
     this.express = express();
 
     this.routes();
-    this.middlewares(settings.middlewares);
-    this.controllers(settings.controllers);
+
+    if (settings.middlewares) {
+      this.middlewares(settings.middlewares);
+    }
+
+    if (settings.controllers) {
+      this.controllers(settings.controllers);
+    }
 
     this.port = settings.port;
   }

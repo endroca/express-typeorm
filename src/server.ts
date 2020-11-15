@@ -6,7 +6,7 @@ import { createConnection } from 'typeorm';
  * MiddleWare
  */
 import { json } from 'express';
-import * as cors from 'cors';
+import cors from 'cors';
 
 /**
  * Controllers
